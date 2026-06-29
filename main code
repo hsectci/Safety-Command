@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Thai Safety App</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      padding: 15px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px;
+      margin: 10px 0;
+      font-size: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .category {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+
+    .word {
+      background: white;
+    }
+
+    #backBtn {
+      background: #333;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Multilingual Safety Command </h1>
+
+<div id="app"></div>
+
+<script>
+const data = [
+  { cat: "ppe", en: "英文: Wear your safety helmet", th: "泰文: ใส่หมวกด้วย", cn: "中文: 請戴安全帽", pn: "Pinyin: sai (帶) muak (帽子) duay" , audio: "helmet.mp3" },
+  { cat: "ppe", en: "英文: Wear helmet", th: "泰文: สวมหมวกนิรภัย", cn: "中文: 安全帽", audio: "helmet.mp3" }
+ 
+];
+
+const categories = [
+  { key: "ppe", name: "PPE" },
+  { key: "lifting", name: "Lifting" },
+  { key: "emergency", name: "Emergency" }
+];
+
+const app = document.getElementById("app");
+
+function showCategories() {
+  app.innerHTML = "<h2>Categories</h2>";
+
+  categories.forEach(cat => {
+    const btn = document.createElement("button");
+    btn.className = "btn category";
+    btn.innerText = cat.name;
+
+    btn.onclick = () => showWords(cat.key, cat.name);
+
+    app.appendChild(btn);
+  });
+}
+
+function showWords(catKey, title) {
+ app.innerHTML = "";
+
+  const back = document.createElement("button");
+  back.className = "btn";
+  back.id = "backBtn";
+  back.innerText = "← Back";
+  back.onclick = showCategories;
+
+  app.appendChild(back);
+
+  const h = document.createElement("h2");
+  h.innerText = title;
+  app.appendChild(h);
+
+  const items = data.filter(d => d.cat === catKey);
+
+  items.forEach(item => {
+    const container = document.createElement("div");
+    container.className = "btn word";
+
+    container.innerHTML = `
+      <div><b>${item.en}</b></div>
+      <div>${item.cn || ""}</div>
+      <div>${item.th}</div>
+      <div>${item.pn}</div>
+      
+    `;
+
+    const audio = document.createElement("audio");
+    audio.src = "MP3/" + item.audio;
+    audio.controls = true;
+    audio.style.width = "20%";
+    audio.style.marginTop = "10px";
+
+    container.appendChild(audio);
+
+    app.appendChild(container);
+  });
+
+    app.appendChild(btn);
+}
+
+showCategories();
+</script>
+
+</body>
+</html>
