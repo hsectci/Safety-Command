@@ -9,62 +9,102 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      padding: 15px;
-      background: #f5f5f5;
-    }
+body {
+  font-family: Arial;
+  margin: 0;
+  padding: 15px;
+  background: linear-gradient(180deg, #f5f7fb, #e9eef7);
+}
 
-    h1 {
-      text-align: center;
-      font-size: 22px;
-    }
+/* Title */
+h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #1f2a44;
+}
 
-    .btn {
-      width: 100%;
-      padding: 18px;
-      margin: 10px 0;
-      font-size: 20px;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
+/* Base button */
+.btn {
+  width: 100%;
+  padding: 18px;
+  margin: 12px 0;
+  font-size: 20px;
+  background: white;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: 0.2s ease;
+}
 
-    .category {
-      background: #007bff;
-      color: white;
-      font-weight: bold;
-    }
+/* Click animation */
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
 
-    .word {
-      background: white;
-    }
+/* Category button */
+.category {
+  background: linear-gradient(135deg, #2C4AA5, #4A6FE3);
+  color: white;
+  font-weight: bold;
+}
 
-    #backBtn {
-      background: #333;
-      color: white;
-    }
-  </style>
+/* Word card */
+.word {
+  background: white;
+  text-align: left;
+  line-height: 1.5;
+  font-size: 18px;
+}
+
+/* Back button */
+#backBtn {
+  background: #333;
+  color: white;
+}
+
+/* Small label (for CN or extra text) */
+small {
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+/* Audio player styling */
+audio {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* Hover effect (for tablet / desktop) */
+.btn:hover {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* Mobile feel improvement */
+body {
+  -webkit-tap-highlight-color: transparent;
+}
+</style>
 </head>
 
 <body>
-
-<h1>Multilingual Safety Command </h1>
-
+<h1>Safety Commands Hub </h1>
 <div id="app"></div>
 
 <script>
 const data = [
   { cat: "ppe", en: "英文: Wear your safety helmet", th: "泰文: ใส่หมวกด้วย", cn: "中文: 請戴安全帽", pn: "Pinyin: sai (帶) muak (帽子) duay" , audio: "safety_helmet.mp3" },
-  { cat: "ppe", en: "英文: Wear helmet", th: "泰文: สวมหมวกนิรภัย", cn: "中文: 安全帽", audio: "helmet.mp3" }
- 
+  { cat: "ppe", en: "英文: Wear your safey harness", th: "泰文: ใส่เข็มขัดนิรภัยด้วย", cn: "中文: 請配戴安全帶",pn: "Pinyin: sai (帶) khem-khat (帶子) ni-ra-phai (安全)duay" , audio: "safety_harness.mp3" },
+  { cat: "emergency", en: "英文: Get down now, it is not safe", th: "泰文: ลงมามันอันตราย", cn: "中文: 下來! 很危險", pn: "Pinyin: long-ma (下來) man an-ta-rai (危險)" , audio: "dangerous.mp3" }
+
 ];
 
 const categories = [
   { key: "ppe", name: "PPE" },
-  { key: "lifting", name: "Lifting" },
-  { key: "emergency", name: "Emergency" }
+  { key: "lifting", name: "Lifting (吊運)" },
+  { key: "emergency", name: "Emergency (指示)" }
 ];
 
 const app = document.getElementById("app");
